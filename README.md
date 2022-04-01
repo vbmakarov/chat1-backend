@@ -9,6 +9,7 @@
 + jsonwebtoken
 
 ## Запуск приложения:
+1. Подключить удаленную базу данных MongoDB в файле src/config/config.ts
 
-Перейти в корень npm start или yarn start
+2. Перейти в корень npm start или yarn start
 Приложение запустится на http://localhost:5000
