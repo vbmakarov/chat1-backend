@@ -18,42 +18,42 @@ router.get('/', authMiddleware, (req: express.Request, res: express.Response) =>
         ...req.body.user
     })
 })
-router.get('/activation/:link', jsonParser, UserController.activateUser)
-router.get('/users', [jsonParser, authMiddleware], UserController.getUsers)
-router.get('/refresh', jsonParser, UserController.refresh)
+router.get('/api/activation/:link', jsonParser, UserController.activateUser)
+router.get('/api/users', [jsonParser, authMiddleware], UserController.getUsers)
+router.get('/api/refresh', jsonParser, UserController.refresh)
 
 //user
-router.post('/registration',
+router.post('/api/registration',
     jsonParser,
     body('email').isEmail(),
     body('password').isLength({ min: 5 }),
     UserController.registration
 )
-router.post('/login', jsonParser, UserController.login)
-router.post('/logout', jsonParser, UserController.logout)
-router.post('/update', [jsonParser, authMiddleware], UserController.updateUserData)
+router.post('/api/login', jsonParser, UserController.login)
+router.post('/api/logout', jsonParser, UserController.logout)
+router.post('/api/update', [jsonParser, authMiddleware], UserController.updateUserData)
 
 
 //Dialogs
-router.post('/dialogs', [jsonParser, authMiddleware], DialogController.create)
-router.get('/dialogs', [jsonParser, authMiddleware], DialogController.fetch)
-router.post('/dialog', [jsonParser, authMiddleware], DialogController.fetchDialogById)
-router.delete('/dialogs/:id', [jsonParser, authMiddleware], DialogController.delete)
+router.post('/api/dialogs', [jsonParser, authMiddleware], DialogController.create)
+router.get('/api/dialogs', [jsonParser, authMiddleware], DialogController.fetch)
+router.post('/api/dialog', [jsonParser, authMiddleware], DialogController.fetchDialogById)
+router.delete('/api/dialogs/:id', [jsonParser, authMiddleware], DialogController.delete)
 
 
 //Messages
-router.get('/dialogs/:id', [jsonParser, authMiddleware], MessageController.fetch)
-router.post('/message/update', [jsonParser, authMiddleware], MessageController.updateReadStatusOne)
-router.post('/message', [jsonParser, authMiddleware], MessageController.create)
-router.post('/message/files', [jsonParser, authMiddleware, uploadFiles], MessageController.createFileMessage)
-router.delete('/message/:id', [jsonParser, authMiddleware], MessageController.delete)
+router.get('/api/dialogs/:id', [jsonParser, authMiddleware], MessageController.fetch)
+router.post('/api/message/update', [jsonParser, authMiddleware], MessageController.updateReadStatusOne)
+router.post('/api/message', [jsonParser, authMiddleware], MessageController.create)
+router.post('/api/message/files', [jsonParser, authMiddleware, uploadFiles], MessageController.createFileMessage)
+router.delete('/api/message/:id', [jsonParser, authMiddleware], MessageController.delete)
 
 
 //File
-router.get('/upload/file/:filename', [jsonParser, authMiddleware], FileController.downloadFile)
-router.post('/avatar', [jsonParser, authMiddleware, uploadAvatar], UserController.setAvatar)
+router.get('/api/upload/file/:filename', [jsonParser, authMiddleware], FileController.downloadFile)
+router.post('/api/avatar', [jsonParser, authMiddleware, uploadAvatar], UserController.setAvatar)
 
-/*router.post('/avatar', function (req, res) {
+/*router.post('/api/avatar', function (req, res) {
     uploadAvatar(req, res, function (err) {
         if (err instanceof multer.MulterError) {
             console.log(err)
